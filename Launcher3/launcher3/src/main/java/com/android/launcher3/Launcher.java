@@ -161,8 +161,8 @@ public class Launcher extends Activity
 
     static final String EXTRA_SHORTCUT_DUPLICATE = "duplicate";
 
-    static final int SCREEN_COUNT = 5;
-    static final int DEFAULT_SCREEN = 2;
+    static final int SCREEN_COUNT = 3;
+    static final int DEFAULT_SCREEN = 1;
 
     // To turn on these properties, type
     // adb shell setprop log.tag.PROPERTY_NAME [VERBOSE | SUPPRESS]
@@ -1369,7 +1369,7 @@ public class Launcher extends Activity
         // Setup the hotseat
         mHotseat = (Hotseat) findViewById(R.id.hotseat);
         if (mHotseat != null) {
-            mHotseat.setVisibility(View.GONE);
+            mHotseat.setVisibility(View.VISIBLE);
             mHotseat.setup(this);
             mHotseat.setOnLongClickListener(this);
         }

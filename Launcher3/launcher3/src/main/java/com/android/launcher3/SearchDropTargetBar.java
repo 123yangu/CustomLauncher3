@@ -23,6 +23,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
@@ -150,20 +151,23 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
      * Shows and hides the search bar.
      */
     public void showSearchBar(boolean animated) {
-        boolean needToCancelOngoingAnimation = mQSBSearchBarAnim.isRunning() && !animated;
-        if (!mIsSearchBarHidden && !needToCancelOngoingAnimation) return;
-        if (animated) {
-            prepareStartAnimation(mQSBSearchBar);
-            mQSBSearchBarAnim.reverse();
-        } else {
-            mQSBSearchBarAnim.cancel();
-            if (mQSBSearchBar != null && mEnableDropDownDropTargets) {
-                mQSBSearchBar.setTranslationY(0);
-            } else if (mQSBSearchBar != null) {
-                mQSBSearchBar.setAlpha(1f);
-            }
-        }
-        mIsSearchBarHidden = false;
+//        boolean needToCancelOngoingAnimation = mQSBSearchBarAnim.isRunning() && !animated;
+//        if (!mIsSearchBarHidden && !needToCancelOngoingAnimation) return;
+//        if (animated) {
+//            prepareStartAnimation(mQSBSearchBar);
+//            mQSBSearchBarAnim.reverse();
+//        } else {
+//            mQSBSearchBarAnim.cancel();
+//            if (mQSBSearchBar != null && mEnableDropDownDropTargets) {
+//                mQSBSearchBar.setTranslationY(0);
+//            } else if (mQSBSearchBar != null) {
+//                mQSBSearchBar.setAlpha(1f);
+//            }
+//        }
+//        mIsSearchBarHidden = false;
+        mQSBSearchBar.setAlpha(0f);
+        mQSBSearchBar.setVisibility(GONE);
+        Log.d("liyujiang","hide QSBSearchBar");
     }
     public void hideSearchBar(boolean animated) {
         boolean needToCancelOngoingAnimation = mQSBSearchBarAnim.isRunning() && !animated;

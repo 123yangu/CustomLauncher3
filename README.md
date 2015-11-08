@@ -16,6 +16,14 @@ AndroidManifest.xml的入口activity加入android:screenOrientation="landscape"�
 ###隐藏Hotseat的显示所有应用的按钮
 LauncherAppState.isDisableAllApps()返回true；   
 
-###隐藏Hotseat
+###隐藏底部应用托盘
 Launcher.java中的mHotseat.setup(this);前加入mHotseat.setVisibility(View.GONE);
+
+###隐藏顶部搜索栏
+SearchDropTargetBar.showSearchBar();
+
+###改屏幕数及默认屏幕
+config.xml中的config_workspaceDefaultScreen为默认显示第几屏（从0开始），相关的有Launcher.java中的DEFAULT_SCREEN = 2;及Workspace.java中的a.getInt(R.styleable.Workspace_defaultScreen, 1);   
+Launcher.java中的SCREEN_COUNT为总屏幕数；   
+
 
