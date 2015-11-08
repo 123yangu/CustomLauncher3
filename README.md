@@ -16,3 +16,6 @@ AndroidManifest.xml的入口activity加入android:screenOrientation="landscape"�
 ###隐藏Hotseat的显示所有应用的按钮
 LauncherAppState.isDisableAllApps()返回true；   
 
+###隐藏Hotseat
+Launcher.java中的mHotseat.setup(this);前加入mHotseat.setVisibility(View.GONE);
+

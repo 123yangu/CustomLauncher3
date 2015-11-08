@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +14,7 @@
 -->
 
 <!-- Full screen view projects under the status bar and contains the background -->
-<com.android.launcher3.LauncherRootView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.launcher3.LauncherRootView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:launcher="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/launcher"
@@ -35,30 +33,6 @@
             android:layout_width="52dp"
             android:layout_height="52dp" />
 
-        <!-- The workspace contains 5 screens of cells -->
-        <com.android.launcher3.Workspace
-            android:id="@+id/workspace"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            launcher:defaultScreen="@integer/config_workspaceDefaultScreen"
-            launcher:pageIndicator="@id/page_indicator">
-        </com.android.launcher3.Workspace>
-
-        <include layout="@layout/hotseat"
-            android:id="@+id/hotseat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <include
-            android:id="@+id/search_drop_target_bar"
-            layout="@layout/search_drop_target_bar" />
-
-        <include layout="@layout/overview_panel"
-            android:id="@+id/overview_panel"
-            android:visibility="gone" />
-
-        <!-- Keep these behind the workspace so that they are not visible when
-             we go into AllApps -->
         <include
             android:id="@+id/page_indicator"
             layout="@layout/page_indicator"
@@ -66,11 +40,35 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
 
-        <include layout="@layout/apps_customize_pane"
+        <com.android.launcher3.Workspace
+            android:id="@+id/workspace"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            launcher:defaultScreen="@integer/config_workspaceDefaultScreen"
+            launcher:pageIndicator="@id/page_indicator" />
+
+        <include
+            android:id="@+id/hotseat"
+            layout="@layout/hotseat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/search_drop_target_bar"
+            layout="@layout/search_drop_target_bar" />
+
+        <include
+            android:id="@+id/overview_panel"
+            layout="@layout/overview_panel"
+            android:visibility="gone" />
+
+        <include
             android:id="@+id/apps_customize_pane"
+            layout="@layout/apps_customize_pane"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible" />
+
     </com.android.launcher3.DragLayer>
 
     <ViewStub

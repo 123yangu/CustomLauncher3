@@ -56,10 +56,10 @@ public class Hotseat extends FrameLayout {
         super(context, attrs, defStyle);
 
         Resources r = context.getResources();
-        mTransposeLayoutWithOrientation = 
+        mTransposeLayoutWithOrientation =
                 r.getBoolean(R.bool.hotseat_transpose_layout_with_orientation);
         mIsLandscape = context.getResources().getConfiguration().orientation ==
-            Configuration.ORIENTATION_LANDSCAPE;
+                Configuration.ORIENTATION_LANDSCAPE;
     }
 
     public void setup(Launcher launcher) {
@@ -77,7 +77,7 @@ public class Hotseat extends FrameLayout {
     public void setOnLongClickListener(OnLongClickListener l) {
         mContent.setOnLongClickListener(l);
     }
-  
+
     private boolean hasVerticalHotseat() {
         return (mIsLandscape && mTransposeLayoutWithOrientation);
     }
@@ -86,13 +86,16 @@ public class Hotseat extends FrameLayout {
     int getOrderInHotseat(int x, int y) {
         return hasVerticalHotseat() ? (mContent.getCountY() - y - 1) : x;
     }
+
     /* Get the orientation specific coordinates given an invariant order in the hotseat. */
     int getCellXFromOrder(int rank) {
         return hasVerticalHotseat() ? 0 : rank;
     }
+
     int getCellYFromOrder(int rank) {
         return hasVerticalHotseat() ? (mContent.getCountY() - (rank + 1)) : 0;
     }
+
     public boolean isAllAppsButtonRank(int rank) {
         if (LauncherAppState.isDisableAllApps()) {
             return false;
@@ -101,7 +104,9 @@ public class Hotseat extends FrameLayout {
         }
     }
 
-    /** This returns the coordinates of an app in a given cell, relative to the DragLayer */
+    /**
+     * This returns the coordinates of an app in a given cell, relative to the DragLayer
+     */
     Rect getCellCoordinates(int cellX, int cellY) {
         Rect coords = new Rect();
         mContent.cellToRect(cellX, cellY, 1, 1, coords);
@@ -166,7 +171,7 @@ public class Hotseat extends FrameLayout {
             // the hotseat in order regardless of which orientation they were added
             int x = getCellXFromOrder(mAllAppsButtonRank);
             int y = getCellYFromOrder(mAllAppsButtonRank);
-            CellLayout.LayoutParams lp = new CellLayout.LayoutParams(x,y,1,1);
+            CellLayout.LayoutParams lp = new CellLayout.LayoutParams(x, y, 1, 1);
             lp.canReorder = false;
             mContent.addViewToCellLayout(allAppsButton, -1, allAppsButton.getId(), lp, true);
         }
@@ -183,8 +188,8 @@ public class Hotseat extends FrameLayout {
     }
 
     void addAllAppsFolder(IconCache iconCache,
-            ArrayList<AppInfo> allApps, ArrayList<ComponentName> onWorkspace,
-            Launcher launcher, Workspace workspace) {
+                          ArrayList<AppInfo> allApps, ArrayList<ComponentName> onWorkspace,
+                          Launcher launcher, Workspace workspace) {
         if (LauncherAppState.isDisableAllApps()) {
             FolderInfo fi = new FolderInfo();
 
@@ -203,7 +208,7 @@ public class Hotseat extends FrameLayout {
             workspace.addInScreen(folder, fi.container, fi.screenId, fi.cellX, fi.cellY,
                     fi.spanX, fi.spanY);
 
-            for (AppInfo info: allApps) {
+            for (AppInfo info : allApps) {
                 ComponentName cn = info.intent.getComponent();
                 if (!onWorkspace.contains(cn)) {
                     Log.d(TAG, "Adding to 'more apps': " + info.intent);
@@ -226,7 +231,7 @@ public class Hotseat extends FrameLayout {
             }
 
             FolderInfo info = fi.getFolderInfo();
-            for (AppInfo a: apps) {
+            for (AppInfo a : apps) {
                 ShortcutInfo si = a.makeShortcut();
                 info.add(si);
             }

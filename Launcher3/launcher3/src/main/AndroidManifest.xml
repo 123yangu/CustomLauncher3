@@ -70,7 +70,7 @@
     <uses-permission android:name="com.android.launcher3.permission.RECEIVE_FIRST_LOAD_BROADCAST" />
 
     <application
-        android:name=".LauncherApplication"
+        android:name="com.android.launcher3.LauncherApplication"
         android:allowBackup="@bool/enable_backup"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher_home"
@@ -80,11 +80,11 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".Launcher"
+            android:name="com.android.launcher3.Launcher"
             android:clearTaskOnLaunch="true"
             android:enabled="true"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="unspecified"
             android:stateNotNeeded="true"
             android:theme="@style/Theme"
             android:windowSoftInputMode="adjustPan">
@@ -99,11 +99,11 @@
         </activity>
 
         <activity
-            android:name=".LauncherExtension"
+            android:name="com.android.launcher3.LauncherExtension"
             android:clearTaskOnLaunch="true"
             android:enabled="false"
             android:launchMode="singleTask"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="unspecified"
             android:stateNotNeeded="true"
             android:theme="@style/Theme"
             android:windowSoftInputMode="adjustPan">
@@ -117,7 +117,7 @@
         </activity>
 
         <activity
-            android:name=".ToggleWeightWatcher"
+            android:name="com.android.launcher3.ToggleWeightWatcher"
             android:enabled="@bool/debug_memory_enabled"
             android:icon="@mipmap/ic_launcher_home"
             android:label="@string/toggle_weight_watcher">
@@ -130,7 +130,7 @@
         </activity>
 
         <activity
-            android:name=".LauncherWallpaperPickerActivity"
+            android:name="com.android.launcher3.LauncherWallpaperPickerActivity"
             android:finishOnCloseSystemDialogs="true"
             android:icon="@mipmap/ic_launcher_wallpaper"
             android:label="@string/pick_wallpaper"
@@ -143,7 +143,7 @@
         </activity>
 
         <activity
-            android:name=".WallpaperCropActivity"
+            android:name="com.android.launcher3.WallpaperCropActivity"
             android:finishOnCloseSystemDialogs="true"
             android:icon="@mipmap/ic_launcher_wallpaper"
             android:label="@string/crop_wallpaper"
@@ -158,7 +158,7 @@
 
         <!-- Debugging tools -->
         <activity
-            android:name=".MemoryDumpActivity"
+            android:name="com.android.launcher3.MemoryDumpActivity"
             android:enabled="@bool/debug_memory_enabled"
             android:excludeFromRecents="true"
             android:icon="@mipmap/ic_launcher_home"
@@ -173,10 +173,10 @@
         </activity>
 
         <service
-            android:name=".MemoryTracker"
-            android:enabled="@bool/debug_memory_enabled"/>
+            android:name="com.android.launcher3.MemoryTracker"
+            android:enabled="@bool/debug_memory_enabled" />
 
-        <receiver android:name=".WallpaperChangedReceiver">
+        <receiver android:name="com.android.launcher3.WallpaperChangedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.WALLPAPER_CHANGED" />
             </intent-filter>
@@ -184,7 +184,7 @@
 
         <!-- Intent received used to install shortcuts from other applications -->
         <receiver
-            android:name=".InstallShortcutReceiver"
+            android:name="com.android.launcher3.InstallShortcutReceiver"
             android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
@@ -193,7 +193,7 @@
 
         <!-- Intent received used to uninstall shortcuts from other applications -->
         <receiver
-            android:name=".UninstallShortcutReceiver"
+            android:name="com.android.launcher3.UninstallShortcutReceiver"
             android:permission="com.android.launcher.permission.UNINSTALL_SHORTCUT">
             <intent-filter>
                 <action android:name="com.android.launcher.action.UNINSTALL_SHORTCUT" />
@@ -201,7 +201,7 @@
         </receiver>
 
         <!-- Intent received used to initialize a restored widget -->
-        <receiver android:name=".AppWidgetsRestoredReceiver">
+        <receiver android:name="com.android.launcher3.AppWidgetsRestoredReceiver">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_HOST_RESTORED" />
             </intent-filter>
@@ -209,24 +209,24 @@
 
         <!-- New user initialization; set up initial wallpaper -->
         <receiver
-            android:name=".UserInitializeReceiver"
+            android:name="com.android.launcher3.UserInitializeReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.USER_INITIALIZE" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".PackageChangedReceiver">
+        <receiver android:name="com.android.launcher3.PackageChangedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
-                <data android:scheme="package"/>
+                <data android:scheme="package" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".StartupReceiver">
+        <receiver android:name="com.android.launcher3.StartupReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -234,7 +234,7 @@
 
         <!-- The settings provider contains Home's data, like the workspace favorites -->
         <provider
-            android:name=".LauncherProvider"
+            android:name="com.android.launcher3.LauncherProvider"
             android:authorities="com.android.launcher3.settings"
             android:exported="true"
             android:readPermission="com.android.launcher3.permission.READ_SETTINGS"
