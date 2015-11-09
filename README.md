@@ -4,8 +4,6 @@
 # Links
 https://android.googlesource.com/platform/packages/apps/Launcher3     
 https://github.com/fookwood/Launcher3    
-https://github.com/krajeswaran/LeanLauncher   
-https://github.com/yuxinburen/Launcher3_1   
 
 # Modify
 ###解决不能安装的问题
