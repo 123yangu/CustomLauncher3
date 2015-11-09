@@ -23,7 +23,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
@@ -75,10 +74,12 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         mQSBSearchBar = qsb;
         if (mQSBSearchBar != null) {
             if (mEnableDropDownDropTargets) {
-                mQSBSearchBarAnim = LauncherAnimUtils.ofFloat(mQSBSearchBar, "translationY", 0,
+                // FIXME: 2015/11/9 modify 3rd para to -mBarHeight
+                mQSBSearchBarAnim = LauncherAnimUtils.ofFloat(mQSBSearchBar, "translationY", -mBarHeight,
                         -mBarHeight);
             } else {
-                mQSBSearchBarAnim = LauncherAnimUtils.ofFloat(mQSBSearchBar, "alpha", 1f, 0f);
+                // FIXME: 2015/11/9 modify 3rd para to 0f
+                mQSBSearchBarAnim = LauncherAnimUtils.ofFloat(mQSBSearchBar, "alpha", 0f, 0f);
             }
             setupAnimation(mQSBSearchBarAnim, mQSBSearchBar);
         } else {
@@ -105,6 +106,9 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
                 if (v != null) {
                     v.setLayerType(View.LAYER_TYPE_NONE, null);
                 }
+                if (mQSBSearchBar.equals(v)) {
+                    hideSearchBar(false);
+                }
             }
         });
     }
@@ -121,8 +125,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         mInfoDropTarget.setSearchDropTargetBar(this);
         mDeleteDropTarget.setSearchDropTargetBar(this);
 
-        mEnableDropDownDropTargets =
-            getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
+        mEnableDropDownDropTargets = getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
 
         // Create the various fade animations
         if (mEnableDropDownDropTargets) {
@@ -151,24 +154,24 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
      * Shows and hides the search bar.
      */
     public void showSearchBar(boolean animated) {
-//        boolean needToCancelOngoingAnimation = mQSBSearchBarAnim.isRunning() && !animated;
-//        if (!mIsSearchBarHidden && !needToCancelOngoingAnimation) return;
-//        if (animated) {
-//            prepareStartAnimation(mQSBSearchBar);
-//            mQSBSearchBarAnim.reverse();
-//        } else {
-//            mQSBSearchBarAnim.cancel();
-//            if (mQSBSearchBar != null && mEnableDropDownDropTargets) {
-//                mQSBSearchBar.setTranslationY(0);
-//            } else if (mQSBSearchBar != null) {
-//                mQSBSearchBar.setAlpha(1f);
-//            }
-//        }
-//        mIsSearchBarHidden = false;
-        mQSBSearchBar.setAlpha(0f);
-        mQSBSearchBar.setVisibility(GONE);
-        Log.d("liyujiang","hide QSBSearchBar");
+        boolean needToCancelOngoingAnimation = mQSBSearchBarAnim.isRunning() && !animated;
+        if (!mIsSearchBarHidden && !needToCancelOngoingAnimation) return;
+        if (animated) {
+            prepareStartAnimation(mQSBSearchBar);
+            mQSBSearchBarAnim.reverse();
+        } else {
+            mQSBSearchBarAnim.cancel();
+            if (mQSBSearchBar != null && mEnableDropDownDropTargets) {
+                // FIXME: 2015/11/9 modify para to -mBarHeight
+                mQSBSearchBar.setTranslationY(-mBarHeight);
+            } else if (mQSBSearchBar != null) {
+                // FIXME: 2015/11/9 modify para to 0f
+                mQSBSearchBar.setAlpha(0f);
+            }
+        }
+        mIsSearchBarHidden = false;
     }
+
     public void hideSearchBar(boolean animated) {
         boolean needToCancelOngoingAnimation = mQSBSearchBarAnim.isRunning() && !animated;
         if (mIsSearchBarHidden && !needToCancelOngoingAnimation) return;
@@ -192,6 +195,7 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
     public int getTransitionInDuration() {
         return sTransitionInDuration;
     }
+
     public int getTransitionOutDuration() {
         return sTransitionOutDuration;
     }

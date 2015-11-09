@@ -1369,7 +1369,7 @@ public class Launcher extends Activity
         // Setup the hotseat
         mHotseat = (Hotseat) findViewById(R.id.hotseat);
         if (mHotseat != null) {
-            mHotseat.setVisibility(View.VISIBLE);
+            mHotseat.setVisibility(View.GONE);
             mHotseat.setup(this);
             mHotseat.setOnLongClickListener(this);
         }

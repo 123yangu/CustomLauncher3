@@ -764,8 +764,9 @@ public class DeviceProfile {
         View pageIndicator = launcher.findViewById(R.id.page_indicator);
         if (pageIndicator != null) {
             if (hasVerticalBarLayout) {
+                // FIXME: 2015/11/9 show page indicators
                 // Hide the page indicators when we have vertical search/hotseat
-                pageIndicator.setVisibility(View.GONE);
+                pageIndicator.setVisibility(View.VISIBLE);
             } else {
                 // Put the page indicators above the hotseat
                 lp = (FrameLayout.LayoutParams) pageIndicator.getLayoutParams();
