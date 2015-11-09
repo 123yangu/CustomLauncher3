@@ -7,6 +7,7 @@ https://github.com/fookwood/Launcher3
 https://github.com/krajeswaran/LeanLauncher   
 https://github.com/yuxinburen/Launcher3_1   
 
+# Modify
 ###解决不能安装的问题
 解决可能因为相同权限声明或内容提供者冲突而不能安装的问题，需要重构包名为非com.android.launcher3，并改动所有com.android.launcher3的引用，如：ProviderConfig.AUTHORITY、AndroidManifest.xml中的permission相关及provider的authorities属性等；   
 
@@ -40,3 +41,5 @@ SearchDropTargetBar.showSearchBar()中改为mQSBSearchBar.setAlpha(0f);
 SearchDropTargetBar.setSearchBar();中改为LauncherAnimUtils.ofFloat(mQSBSearchBar, "translationY", -mBarHeight, -mBarHeight);及LauncherAnimUtils.ofFloat(mQSBSearchBar, "alpha", 0f, 0f);
 
 
+# Screenshots
+![第一屏截图](/Screenshots/0.jpg)   
